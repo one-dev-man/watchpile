@@ -8,20 +8,20 @@ const shellmin = new Shellmin();
 
 shellmin.registerCommand({
     label: "start",
-    help: "WatchPile start <workdir> --tsconfig <tsconfig_path> [--outdir <outdir>] [--filter <regexp>] [--firstCompileAll] [--log-output <log_output_path>]",
+    help: "watchpile start <workdir> <outdir> --tsconfig <tsconfig_path> [--filter <regexp>] [--firstCompileAll] [--log-output <log_output_path>]",
     callback: async (label: string, args: any[], cli: Shellmin) => {
-        if(args.length > 0 && args["-tsconfig"]) {
+        if(args.length > 1 && args["-tsconfig"]) {
 
             let options = {
                 workdir: path.join(process.cwd(), (args[0] || "./") ),
-                outdir: path.join(process.cwd(), (args["-outdir"] || "./dist/") ),
+                outdir: path.join(process.cwd(), (args[1] || "./dist/") ),
                 tsconfig: path.join(process.cwd(), args["-tsconfig"]),
                 fitler: new RegExp(args["-filter"] || "(.)+\\.ts$", "g"),
                 firstCompileAll: args["-firstCompileAll"] ? true : false,
                 log_output_path: args["-log-output"] ? path.join(process.cwd(), args["-log-output"]) : null,
             };
             options.workdir = fs.existsSync(options.workdir) ? options.workdir : fs.existsSync(args[0]) ? args[0] : process.cwd();
-            options.outdir = fs.existsSync(options.outdir) ? options.outdir : fs.existsSync(args["-outdir"]) ? args["-outdir"] : path.join(process.cwd(), "./dist/");
+            options.outdir = fs.existsSync(options.outdir) ? options.outdir : fs.existsSync(args[1]) ? args[1] : path.join(process.cwd(), "./dist/");
             options.tsconfig = fs.existsSync(options.tsconfig) ? options.tsconfig : fs.existsSync(args["-tsconfig"]) ? args["-tsconfig"] : path.join(process.cwd(), "./tsconfig.json");
             // options.log_output_path = options.log_output_path ? fs.existsSync(options.log_output_path) ? options.log_output_path : fs.existsSync(args["-log-output"]) ? args["-log-output"] : null : null;
 
@@ -47,15 +47,18 @@ shellmin.registerCommand({
                     console.warn(`File "§6${file}§r" moved or deleted.`);
                 }
                 else {
-                    console.info(`File "§6${file}§r" compiled to "§6${outfile}§r".`);
+                    console.info(`File "§6${file}§r" compiled to "§6${outfile}§r"${event_type == "first_compile_all" ? " (§efirst compilation§r)" : ""}.`);
                 }
             });
 
             watchpile.on("error", e => console.error);
 
             console.info("Listening for changes...");
+
+            return true;
         }
-        return true;
+
+        return false;
     }
 });
 

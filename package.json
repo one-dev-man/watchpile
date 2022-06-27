@@ -1,6 +1,6 @@
 {
   "name": "watchpile",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
   "main": "./dist/index.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "test": "node dist/index.js start ./test/src --outdir ./test/dist --tsconfig ./tsconfig.json --firstCompileAll --log-output log.txt"
   },
   "bin": {
-    "watchpiler": "./index.js"
+    "watchpile": "./cli.js"
   },
   "keywords": [],
   "author": "onedevman",

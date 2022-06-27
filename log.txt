@@ -1,0 +1,3 @@
+[INFO - 28/6/2022 at 00:46:36.335] Listening for changes...
+[INFO - 28/6/2022 at 00:46:37.679] File "R:\watchpiler\test\src\a.ts" compiled to "R:\watchpiler\test\dist\a.js" (first compilation).
+[INFO - 28/6/2022 at 00:46:37.718] File "R:\watchpiler\test\src\x\b.ts" compiled to "R:\watchpiler\test\dist\x\b.js" (first compilation).
