@@ -1,15 +1,23 @@
 {
-  "name": "watchpiler",
+  "name": "watchpile",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "del .\\dist /S /Q && tsc --build && cd src && copyfiles -e=\"./**/*.ts\" \"./**/*\" \"../dist/src/\" && cd ../",
+    "test": "node dist/index.js start ./test/src --outdir ./test/dist --tsconfig ./tsconfig.json --firstCompileAll --log-output log.txt"
+  },
+  "bin": {
+    "watchpiler": "./index.js"
   },
   "keywords": [],
   "author": "onedevman",
   "license": "GPL-3.0",
   "devDependencies": {
     "@types/node": "^18.0.0"
+  },
+  "dependencies": {
+    "nodtilus": "^0.0.9",
+    "shellmin": "^0.0.7"
   }
 }

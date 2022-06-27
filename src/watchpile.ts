@@ -3,12 +3,11 @@ import EventEmitter from "events";
 import fs from "fs";
 import path from "path";
 
-import ArraysUtil from "./utils/arraysutil";
-import FilesUtil from "./utils/filesutil";
+import nodtilus from "nodtilus";
 
-type WatchPiler_Events = "start" | "compile" | "error" | "stop";
+type WatchPile_Events = "start" | "compile" | "error" | "stop";
 
-export default class WatchPiler extends EventEmitter {
+export default class WatchPile extends EventEmitter {
     
     #fswatcher_abort_controller: AbortController = new AbortController();
     #fswatcher: fs.FSWatcher | null = null;
@@ -24,29 +23,29 @@ export default class WatchPiler extends EventEmitter {
 
     //
 
-    addListener(eventName: WatchPiler_Events, listener: (...args: any[]) => void): this { return super.addListener(eventName, listener); }
+    addListener(eventName: WatchPile_Events, listener: (...args: any[]) => void): this { return super.addListener(eventName, listener); }
     
-    emit(eventName: WatchPiler_Events, ...args: any[]): boolean { return super.emit(eventName, ...args); }
+    emit(eventName: WatchPile_Events, ...args: any[]): boolean { return super.emit(eventName, ...args); }
 
-    listenerCount(eventName: WatchPiler_Events): number { return super.listenerCount(eventName); }
+    listenerCount(eventName: WatchPile_Events): number { return super.listenerCount(eventName); }
 
-    listeners(eventName: WatchPiler_Events): Function[] { return super.listeners(eventName); }
+    listeners(eventName: WatchPile_Events): Function[] { return super.listeners(eventName); }
 
-    off(eventName: WatchPiler_Events, listener: (...args: any[]) => void): this { return super.off(eventName, listener); }
+    off(eventName: WatchPile_Events, listener: (...args: any[]) => void): this { return super.off(eventName, listener); }
     
-    on(eventName: WatchPiler_Events, listener: (...args: any[]) => void): this { return super.on(eventName, listener); }
+    on(eventName: WatchPile_Events, listener: (...args: any[]) => void): this { return super.on(eventName, listener); }
     
-    once(eventName: WatchPiler_Events, listener: (...args: any[]) => void): this { return super.once(eventName, listener); }
+    once(eventName: WatchPile_Events, listener: (...args: any[]) => void): this { return super.once(eventName, listener); }
 
-    prependListener(eventName: WatchPiler_Events, listener: (...args: any[]) => void): this { return super.prependListener(eventName, listener); }
+    prependListener(eventName: WatchPile_Events, listener: (...args: any[]) => void): this { return super.prependListener(eventName, listener); }
     
-    prependOnceListener(eventName: WatchPiler_Events, listener: (...args: any[]) => void): this { return super.prependOnceListener(eventName, listener); }
+    prependOnceListener(eventName: WatchPile_Events, listener: (...args: any[]) => void): this { return super.prependOnceListener(eventName, listener); }
     
-    rawListeners(eventName: WatchPiler_Events): Function[] { return super.rawListeners(eventName); }
+    rawListeners(eventName: WatchPile_Events): Function[] { return super.rawListeners(eventName); }
 
-    removeAllListeners(event?: WatchPiler_Events): this { return super.removeAllListeners(event); }
+    removeAllListeners(event?: WatchPile_Events): this { return super.removeAllListeners(event); }
 
-    removeListener(eventName: WatchPiler_Events, listener: (...args: any[]) => void): this { return super.removeListener(eventName, listener); }
+    removeListener(eventName: WatchPile_Events, listener: (...args: any[]) => void): this { return super.removeListener(eventName, listener); }
 
     //
 
@@ -93,20 +92,20 @@ export default class WatchPiler extends EventEmitter {
 
                 if(!fs.existsSync(filepath)) {
                     if(fs.existsSync(out_filepath)) {
-                        FilesUtil.delete(out_filepath);
+                        nodtilus.files.delete(out_filepath);
                         this.emit("compile", filepath, out_filepath, "moved_or_deleted");
                     }
                 }
                 else {
                     if(!fs.statSync(filepath).isDirectory()) {
 
-                        FilesUtil.mkdirs(path.dirname(out_filepath));
+                        nodtilus.files.mkdirs(path.dirname(out_filepath));
                         
                         // 
 
                         let tmp_config_file = path.join(__dirname, "/tmp/", `/${compilation_timestamp}.json`);
 
-                        FilesUtil.mkdirs(path.dirname(tmp_config_file));
+                        nodtilus.files.mkdirs(path.dirname(tmp_config_file));
                         fs.copyFileSync(options.tsconfig, tmp_config_file);
                         
                         let tmp_config = JSON.parse(fs.readFileSync(tmp_config_file).toString("utf-8").replace(/((\/\*(.)+\*\/)|(\/\/(.)+))/g, ""));
@@ -133,8 +132,8 @@ export default class WatchPiler extends EventEmitter {
                             })
                         } catch(e) {
                             console.error(e);
-                            if(Object.keys(e).includes("stdout")) {
-                                console.log(e.stdout.toString("utf-8"))
+                            if(Object.keys(e as any).includes("stdout")) {
+                                console.log( (e as any).stdout.toString("utf-8") );
                             }
                         }
                     }
