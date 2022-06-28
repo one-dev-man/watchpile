@@ -21,11 +21,12 @@ shellmin.registerCommand({
                 log_output_path: args["-log-output"] ? path.join(process.cwd(), args["-log-output"]) : null,
             };
             options.workdir = fs.existsSync(options.workdir) ? options.workdir : fs.existsSync(args[0]) ? args[0] : process.cwd();
-            options.outdir = fs.existsSync(options.outdir) ? options.outdir : fs.existsSync(args[1]) ? args[1] : path.join(process.cwd(), "./dist/");
+            // options.outdir = fs.existsSync(options.outdir) ? options.outdir : fs.existsSync(args[1]) ? args[1] : path.join(process.cwd(), "./dist/");
             options.tsconfig = fs.existsSync(options.tsconfig) ? options.tsconfig : fs.existsSync(args["-tsconfig"]) ? args["-tsconfig"] : path.join(process.cwd(), "./tsconfig.json");
             // options.log_output_path = options.log_output_path ? fs.existsSync(options.log_output_path) ? options.log_output_path : fs.existsSync(args["-log-output"]) ? args["-log-output"] : null : null;
 
-            // console.log(options);
+            console.log(options);
+            nodtilus.files.mkdirs(path.dirname(options.outdir));
 
             if(options.log_output_path) {
                 nodtilus.files.mkdirs(path.dirname(options.log_output_path));

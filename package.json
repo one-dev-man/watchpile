@@ -5,7 +5,7 @@
   "main": "./dist/index.js",
   "scripts": {
     "build": "del .\\dist /S /Q && tsc --build && cd src && copyfiles -e=\"./**/*.ts\" \"./**/*\" \"../dist/src/\" && cd ../",
-    "test": "node dist/index.js start ./test/src --outdir ./test/dist --tsconfig ./tsconfig.json --firstCompileAll --log-output log.txt"
+    "test": "watchpile start ./test/src ./test/dist --tsconfig ./tsconfig.json --log-output log.txt"
   },
   "bin": {
     "watchpile": "./cli.js"

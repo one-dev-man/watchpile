@@ -1,3 +1,5 @@
-[INFO - 28/6/2022 at 00:46:36.335] Listening for changes...
-[INFO - 28/6/2022 at 00:46:37.679] File "R:\watchpiler\test\src\a.ts" compiled to "R:\watchpiler\test\dist\a.js" (first compilation).
-[INFO - 28/6/2022 at 00:46:37.718] File "R:\watchpiler\test\src\x\b.ts" compiled to "R:\watchpiler\test\dist\x\b.js" (first compilation).
+[INFO - 28/6/2022 at 15:19:46.230] Listening for changes...
+[INFO - 28/6/2022 at 15:19:51.717] File "R:\watchpile\test\src\a.ts" compiled to "R:\watchpile\test\dist\a.js".
+[INFO - 28/6/2022 at 15:19:51.766] File "R:\watchpile\test\src\a.ts" compiled to "R:\watchpile\test\dist\a.js".
+[INFO - 28/6/2022 at 15:20:02.909] File "R:\watchpile\test\src\x\y\c.ts" compiled to "R:\watchpile\test\dist\x\y\c.js".
+[INFO - 28/6/2022 at 15:20:02.972] File "R:\watchpile\test\src\x\y\c.ts" compiled to "R:\watchpile\test\dist\x\y\c.js".

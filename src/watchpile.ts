@@ -112,10 +112,13 @@ export default class WatchPile extends EventEmitter {
                         
                         delete tmp_config.include;
                         delete tmp_config.compilerOptions.outDir;
+                        delete tmp_config.compilerOptions.outFile;
                         delete tmp_config.compilerOptions.rootDir;
+                        delete tmp_config.compilerOptions.rootDirs;
                         tmp_config.include = [filepath];
-                        tmp_config.compilerOptions.outDir = path.dirname(out_filepath);
-                        tmp_config.compilerOptions.rootDir = path.dirname(filepath);
+                        tmp_config.compilerOptions.outDir = this.outdir;
+                        // tmp_config.compilerOptions.outFile = path.dirname(out_filepath);
+                        tmp_config.compilerOptions.rootDir = this.workdir;
                         
                         fs.writeFileSync(tmp_config_file, JSON.stringify(tmp_config, null, 2));
 
