@@ -1,11 +1,11 @@
 {
   "name": "watchpile",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "main": "./dist/index.js",
   "scripts": {
     "build": "del .\\dist /S /Q && tsc --build && cd src && copyfiles -e=\"./**/*.ts\" \"./**/*\" \"../dist/src/\" && cd ../",
-    "test": "watchpile start ./test/src ./test/dist --tsconfig ./tsconfig.json --log-output log.txt"
+    "test": "watchpile start ./test/src ./test/dist --tsconfig ./tsconfig.json"
   },
   "bin": {
     "watchpile": "./cli.js"

@@ -25,7 +25,7 @@ shellmin.registerCommand({
             options.tsconfig = fs.existsSync(options.tsconfig) ? options.tsconfig : fs.existsSync(args["-tsconfig"]) ? args["-tsconfig"] : path.join(process.cwd(), "./tsconfig.json");
             // options.log_output_path = options.log_output_path ? fs.existsSync(options.log_output_path) ? options.log_output_path : fs.existsSync(args["-log-output"]) ? args["-log-output"] : null : null;
 
-            console.log(options);
+            // console.log(options);
             nodtilus.files.mkdirs(path.dirname(options.outdir));
 
             if(options.log_output_path) {
